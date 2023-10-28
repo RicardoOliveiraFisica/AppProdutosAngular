@@ -8,6 +8,9 @@ import { ButtonComponent } from './components/button/button.component';
 import { IconComponent } from './components/icon/icon.component';
 import { NavebarComponent } from './components/navebar/navebar.component';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './pages/home/home.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { EditComponent } from './pages/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     ButtonComponent,
     IconComponent,
-    NavebarComponent
+    NavebarComponent,
+    HomeComponent,
+    ProductsComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
