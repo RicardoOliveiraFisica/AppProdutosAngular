@@ -12,8 +12,8 @@
   </thead>
   <tbody>
     <tr *ngFor="let product of products" scope="row">
-      <th scope="row  col-md-8">{{ product.nome }}</th>
-      <td scope="col">{{ product.codigoBarras }}</td>
+      <th scope="row  col-md-8">{{ product.nomeDoProduto }}</th>
+      <td scope="col">{{ product.codigoDeBarras }}</td>
       <td scope="col">{{ product.preco | currency: 'BRL' }}</td>
       <td scope="col">
       </td>
