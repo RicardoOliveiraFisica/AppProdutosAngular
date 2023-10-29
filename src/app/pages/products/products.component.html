@@ -1,1 +1,22 @@
-<p>products works!</p>
+<h1 class="display-6">Lista de Produtos</h1>
+<hr>
+<a class="btn btn-dark" routerLink="/products/create">Novo</a>
+<table class="table table-light table-striped table-bordered mt-3 p-0">
+  <thead>
+    <tr scope="row">
+      <th scope="col ">Nome</th>
+      <th scope="col col-md-3">Código de Barras</th>
+      <th scope="col col-md-2">Preço</th>
+      <th scope="col col-md-1">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products" scope="row">
+      <th scope="row  col-md-8">{{ product.nome }}</th>
+      <td scope="col">{{ product.codigoBarras }}</td>
+      <td scope="col">{{ product.preco | currency: 'BRL' }}</td>
+      <td scope="col">
+      </td>
+    </tr>
+  </tbody>
+</table>
