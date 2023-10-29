@@ -16,5 +16,16 @@ export class ProductsService {
     return this.http.get<IProduct[]>(`${this.api}/${this.endpoint}`);
   }
 
+  register(product: IProduct) {
+    return this.http.post<IProduct>(`${this.api}/${this.endpoint}`, product);
+  }
+
+  getById(id: String) {
+    return this.http.get<IProduct>(`${this.api}/${this.endpoint}/${id}`);
+  }
+
+  setById(id: String, product: IProduct) {
+    return this.http.put<IProduct>(`${this.api}/${this.endpoint}/${id}`, product);
+  }
 
 }
