@@ -18,4 +18,8 @@ export class ProductsComponent {
     });
   }
 
+  delete(id: number) {
+    console.log('deletado')
+  }
+
 }

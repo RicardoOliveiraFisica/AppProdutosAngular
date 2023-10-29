@@ -12,10 +12,19 @@
   </thead>
   <tbody>
     <tr *ngFor="let product of products" scope="row">
-      <th scope="row  col-md-8">{{ product.nomeDoProduto }}</th>
-      <td scope="col">{{ product.codigoDeBarras }}</td>
+      <th scope="col">{{ product.nome }}</th>
+      <td scope="col">{{ product.codigoBarras }}</td>
       <td scope="col">{{ product.preco | currency: 'BRL' }}</td>
       <td scope="col">
+        <div scope="row">
+        <div scope="col ">
+          <app-icon icon="edit_note" [routerLink]="['/products/edit/', product.id]" title="Editar produto"></app-icon>
+        </div>
+        <div scope="col ">
+          <app-icon icon="delete_outline" (click)="delete(product.id)" title="Excluir cadastro"></app-icon>
+        </div>
+      </div>
+
       </td>
     </tr>
   </tbody>

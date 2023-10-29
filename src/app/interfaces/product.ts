@@ -1,6 +1,6 @@
 export interface IProduct {
-  id?: number,
-  nomeDoProduto: string,
-  codigoDeBarras: string,
+  id: number,
+  nome: String,
+  codigoBarras: String,
   preco: number
 }
