@@ -1,1 +1,6 @@
-<p>button works!</p>
+<button type="button"
+  class="btn btn-{{ color }}
+  {{ size ? 'btn-' + size : ''}}"
+  [disabled] = "disabled">
+  {{ label }}
+</button>
