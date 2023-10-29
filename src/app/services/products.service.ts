@@ -28,4 +28,8 @@ export class ProductsService {
     return this.http.put<IProduct>(`${this.api}/${this.endpoint}/${id}`, product);
   }
 
+  deleteById(id: String) {
+    return this.http.delete(`${this.api}/${this.endpoint}/${id}`);
+  }
+
 }
