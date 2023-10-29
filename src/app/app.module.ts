@@ -16,6 +16,7 @@ import { RegisterComponent } from './pages/register/register.component';
 
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import {MatIconModule} from '@angular/material/icon';
 
 registerLocaleData(ptBr);
 
@@ -35,7 +36,8 @@ registerLocaleData(ptBr);
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' }
