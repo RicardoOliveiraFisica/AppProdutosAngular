@@ -3,28 +3,27 @@
 <a class="btn btn-dark" routerLink="/products/create">Novo</a>
 <table class="table table-light table-striped table-bordered mt-3 p-0">
   <thead>
-    <tr scope="row">
-      <th scope="col ">Nome</th>
-      <th scope="col col-md-3">Código de Barras</th>
-      <th scope="col col-md-2">Preço</th>
-      <th scope="col col-md-1">Ações</th>
+    <tr class="row">
+      <th class="col ">Nome</th>
+      <th class="col col-md-3">Código de Barras</th>
+      <th class="col col-md-2">Preço</th>
+      <th class="col col-md-2 text-center">Ações</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products" scope="row">
-      <th scope="col">{{ product.nome }}</th>
-      <td scope="col">{{ product.codigoBarras }}</td>
-      <td scope="col">{{ product.preco | currency: 'BRL' }}</td>
-      <td scope="col">
-        <div scope="row">
-        <div scope="col ">
+    <tr *ngFor="let product of products" class="row">
+      <th class="col">{{ product.nome }}</th>
+      <td class="col col-md-3">{{ product.codigoBarras }}</td>
+      <td class="col col-md-2">{{ product.preco | currency: 'BRL' }}</td>
+      <td class="col col-md-2 ">
+        <div class="row justify-content-md-center">
+          <div class="col col-lg-4 text-center">
           <app-icon icon="edit_note" [routerLink]="['/products/edit/', product.id]" title="Editar produto"></app-icon>
         </div>
-        <div scope="col ">
+          <div class="col col-lg-4 text-center">
           <app-icon icon="delete_outline" (click)="delete(product.id)" title="Excluir cadastro"></app-icon>
         </div>
-      </div>
-
+        </div>
       </td>
     </tr>
   </tbody>
