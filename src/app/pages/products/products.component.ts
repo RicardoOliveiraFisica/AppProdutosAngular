@@ -14,12 +14,12 @@ export class ProductsComponent {
   ngOnInit() {
     this.productsService.getAllProducts().subscribe( (result: IProduct[]) => {
       this.products = result;
-      console.log(result);
     });
   }
 
   delete(id: number) {
-    console.log('deletado')
+    this.productsService.deleteById(id + '').subscribe( result => {
+      this.products = this.products.filter(produto => (produto.id != id))
+    });
   }
-
 }

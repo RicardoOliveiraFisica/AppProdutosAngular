@@ -5,8 +5,8 @@
   <thead>
     <tr class="row">
       <th class="col ">Nome</th>
-      <th class="col col-md-3">Código de Barras</th>
-      <th class="col col-md-2">Preço</th>
+      <th class="col col-md-3 text-center">Código de Barras</th>
+      <th class="col col-md-2 text-center">Preço</th>
       <th class="col col-md-2 text-center">Ações</th>
     </tr>
   </thead>
@@ -18,10 +18,10 @@
       <td class="col col-md-2 ">
         <div class="row justify-content-md-center">
           <div class="col col-lg-4 text-center">
-          <app-icon icon="edit_note" [routerLink]="['/products/edit/', product.id]" title="Editar produto"></app-icon>
+          <app-icon icon="edit_note" [routerLink]="['/products/edit/', product.id+'']" title="Editar produto"></app-icon>
         </div>
           <div class="col col-lg-4 text-center">
-          <app-icon icon="delete_outline" (click)="delete(product.id)" title="Excluir cadastro"></app-icon>
+          <app-icon icon="delete_outline" (click)="delete(product.id)" title="Excluir produto"></app-icon>
         </div>
         </div>
       </td>

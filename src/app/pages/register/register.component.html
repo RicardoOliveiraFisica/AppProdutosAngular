@@ -1,1 +1,26 @@
-<p>register works!</p>
+<h1 class="display-12">Cadastro de Produtos</h1>
+<hr>
+<div class="container-fluid">
+  <form [formGroup]="productForm" (ngSubmit)="register()">
+    <div class="row">
+      <div class="col col-8">
+          <label for="nome" class="form-label">Nome do Produto</label>
+          <input type="text" class="form-control" id="nome" aria-describedby="nameHelp" formControlName="nome" placeholder="Digite o nome do produto">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-4">
+          <label for="nome" class="form-label">Código de Barras</label>
+          <input type="text" class="form-control" id="codigoBarras" aria-describedby="nameHelp" formControlName="codigoBarras" placeholder="Digite o codigo de barras">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-2">
+          <label for="nome" class="form-label">Preço</label>
+          <input type="text" class="form-control" id="preco" aria-describedby="nameHelp" formControlName="preco" placeholder="Digite o preço do produto">
+      </div>
+    </div>
+    <app-button label="Voltar"></app-button>
+    <button type="submit" class="btn btn-dark" [disabled]="!productForm.valid">Atualizar</button>
+  </form>
+</div>

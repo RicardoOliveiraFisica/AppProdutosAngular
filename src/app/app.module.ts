@@ -8,7 +8,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ButtonComponent } from './components/button/button.component';
 import { IconComponent } from './components/icon/icon.component';
 import { NavebarComponent } from './components/navebar/navebar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { EditComponent } from './pages/edit/edit.component';
@@ -37,6 +37,7 @@ registerLocaleData(ptBr);
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     MatIconModule
   ],
   providers: [
