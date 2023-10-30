@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from 'src/app/interfaces/product';
 import { ProductsService } from 'src/app/services/products.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit',
@@ -34,13 +35,35 @@ export class EditComponent {
         })
       })
     }
+    else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Produto não encontrado!',
+        footer: 'Recarregue a página e tente novamente'
+      });
+      this.router.navigate(['/products']);
+    }
   }
 
   update() {
     const product: IProduct = this.productForm.value as IProduct;
     this.productsService.update(product).subscribe(result => {
-      console.log('atualizado');
+      Swal.fire(
+        'Atualizado!',
+        'Produto atualizado com sucesso!',
+        'success'
+      );
       this.router.navigate(['/products']);
+
+    }, error => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Produto não atualizado!',
+        footer: (error.error.errors ? error.error.errors[0].defaultMessage : error.error.message)
+      })
     });
   }
 }

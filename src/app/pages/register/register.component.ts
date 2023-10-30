@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IProduct } from 'src/app/interfaces/product';
 import { ProductsService } from 'src/app/services/products.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -24,8 +25,20 @@ export class RegisterComponent {
   register() {
     const product: IProduct = this.productForm.value as IProduct;
     this.productsService.register(product).subscribe(result => {
-      console.log('registrado');
+      Swal.fire(
+        'Cadastrado!',
+        'Produto cadastrado com sucesso!',
+        'success'
+      );
       this.router.navigate(['/products']);
+    }, error => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Produto não cadastrado!',
+        footer: (error.error.errors ? error.error.errors[0].defaultMessage : error.error.message)
+      })
     });
   }
 
