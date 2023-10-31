@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class RegisterComponent {
   productForm = new FormGroup({
     id: new FormControl(0, Validators.required),
-    nome: new FormControl('', Validators.required),
+    nome: new FormControl('', [Validators.maxLength(100) ,Validators.required]),
     codigoBarras: new FormControl('', Validators.required),
     preco: new FormControl(0.00, Validators.required)
   });
@@ -29,8 +29,10 @@ export class RegisterComponent {
         'Cadastrado!',
         'Produto cadastrado com sucesso!',
         'success'
-      );
-      this.router.navigate(['/products']);
+      ).then((result) => {
+        if (result.isConfirmed)
+          this.newRegister();
+      });
     }, error => {
       console.error(error);
       Swal.fire({
@@ -40,6 +42,26 @@ export class RegisterComponent {
         footer: (error.error.errors ? error.error.errors[0].defaultMessage : error.error.message)
       })
     });
+  }
+
+  newRegister() {
+    Swal.fire({
+      title: 'Continuar cadastrando?',
+      text: "Se desejar realizar um novo cadastro clique em SIM!",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productForm.reset();
+
+      } else {
+        this.router.navigate(['/products']);
+      }
+    })
   }
 
 }

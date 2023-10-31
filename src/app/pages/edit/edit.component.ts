@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class EditComponent {
   productForm = new FormGroup({
     id: new FormControl(0, Validators.required),
-    nome: new FormControl('', Validators.required),
+    nome: new FormControl('', [Validators.maxLength(100) ,Validators.required]),
     codigoBarras: new FormControl('', Validators.required),
     preco: new FormControl(0.00, Validators.required)
   });

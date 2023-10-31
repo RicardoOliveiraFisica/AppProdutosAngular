@@ -27,7 +27,8 @@ export class ProductsComponent {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, exclua-o!'
+        confirmButtonText: 'Sim, exclua-o!',
+        cancelButtonText: 'Não'
       }).then((result) => {
         if (result.isConfirmed) {
           this.productsService.deleteById(id + '').subscribe( result => {

@@ -20,7 +20,7 @@
           <input type="number" class="form-control" id="preco" aria-describedby="nameHelp" formControlName="preco" placeholder="Digite o preço do produto">
       </div>
     </div>
-    <app-button label="Voltar"></app-button>
+    <app-button label="Voltar" [routerLink]="['/products/']"></app-button>
     <button type="submit" class="btn btn-dark" [disabled]="!productForm.valid">Atualizar</button>
   </form>
 </div>
