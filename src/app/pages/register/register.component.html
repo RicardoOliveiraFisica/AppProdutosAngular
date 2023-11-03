@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <form [formGroup]="productForm" (ngSubmit)="register()">
     <div class="row my-3">
-      <div class="col col-8">
+      <div class="col col-sm col-md-10 col-lg-8">
           <label for="nome" class="form-label">Nome do Produto</label>
           <input type="text" class="form-control" id="nome" aria-describedby="nameHelp" formControlName="nome" placeholder="Digite o nome do produto">
           <ng-container *ngIf="productForm.controls.nome.touched || submitted">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="row my-3">
-      <div class="col col-4">
+      <div class="col col-sm col-md-6 col-lg-4">
           <label for="nome" class="form-label">Código de Barras</label>
           <input type="text" class="form-control" id="codigoBarras" aria-describedby="nameHelp" formControlName="codigoBarras" placeholder="Digite o codigo de barras">
           <ng-container *ngIf="productForm.controls.codigoBarras.touched || submitted">
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="row my-3">
-      <div class="col col-2">
+      <div class="col col-sm col-md-4 col-lg-2">
           <label for="nome" class="form-label">Preço</label>
           <input type="text" class="form-control" id="preco" aria-describedby="nameHelp" (keyup)="getCurrencyMask()" formControlName="preco" placeholder="Digite o preço">
           <ng-container *ngIf="productForm.controls.preco.touched || submitted">
