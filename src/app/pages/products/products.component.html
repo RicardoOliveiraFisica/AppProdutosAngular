@@ -1,30 +1,32 @@
-<h1 class="display-6">Lista de Produtos</h1>
+<h1 class="display-12 mt-3 text-center">Lista de Produtos</h1>
 <hr>
-<a class="btn btn-dark" routerLink="/products/create">Novo</a>
-<table class="table table-light table-striped table-bordered mt-3 p-0">
-  <thead>
-    <tr scope="row">
-      <th scope="col ">Nome</th>
-      <th scope="col col-md-3 text-center">Código de Barras</th>
-      <th scope="col col-md-2 text-center">Preço</th>
-      <th scope="col col-md-2 text-center">Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products" scope="row">
-      <th scope="col">{{ product.nome }}</th>
-      <td scope="col" class="col-md-3">{{ product.codigoBarras }}</td>
-      <td scope="col" class="col-md-2">{{ product.preco | currency: 'BRL' }}</td>
-      <td scope="col" class="col-md-2 ">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-4 text-center">
-          <app-icon icon="edit_note" [routerLink]="['/products/edit/', product.id+'']" title="Editar produto"></app-icon>
-        </div>
-          <div class="col col-lg-4 text-center">
-          <app-icon icon="delete_outline" (click)="delete(product.id)" title="Excluir produto"></app-icon>
-        </div>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<a class="btn btn-dark mb-3" routerLink="/products/create">Novo</a>
+<div class="table-responsive tbProdutos">
+  <table class="table table-light table-striped table-bordered p-0 table-hover">
+    <thead class="table-dark">
+      <tr scope="row">
+        <th scope="col"class="col text-center rowOne">Nome</th>
+        <th scope="col" class="col-md-3 text-center rowOne">Código de Barras</th>
+        <th scope="col" class="col-md-2 text-center rowOne">Preço</th>
+        <th scope="col" class="col-md-2 text-center rowOne">Ações</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let product of products" scope="row">
+        <th scope="col">{{ product.nome }}</th>
+        <td scope="col" class="col-md-3">{{ product.codigoBarras }}</td>
+        <td scope="col" class="col-md-2">{{ product.preco | currency: 'BRL' }}</td>
+        <td scope="col" class="col-md-2 ">
+          <div class="row justify-content-md-center">
+            <div class="col col-lg-4 text-center">
+            <app-icon icon="edit_note" [routerLink]="['/products/edit/', product.id+'']" title="Editar produto"></app-icon>
+          </div>
+            <div class="col col-lg-4 text-center">
+            <app-icon icon="delete_outline" (click)="delete(product.id)" title="Excluir produto"></app-icon>
+          </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

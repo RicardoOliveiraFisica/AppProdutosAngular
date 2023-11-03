@@ -1,0 +1,9 @@
+.tbProdutos {
+  height: 400px;
+  overflow:auto;
+}
+
+.rowOne {
+  position: sticky;
+  top: 0px;
+}
