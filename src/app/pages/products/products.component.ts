@@ -25,17 +25,21 @@ export class ProductsComponent {
         text: "Esse processo é irreversível!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#212529',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Sim, exclua-o!',
         cancelButtonText: 'Não'
       }).then((result) => {
         if (result.isConfirmed) {
           this.productsService.deleteById(id + '').subscribe( result => {
-            Swal.fire(
-              'Deletado!',
-              'Produto deletado com sucesso!',
-              'success'
+            Swal.fire({
+                title: 'Deletado!',
+                text: "Produto deletado com sucesso!",
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#212529',
+                confirmButtonText: 'Ok'
+              }
             );
             this.products = this.products.filter(produto => (produto.id != id));
           }, error => {
@@ -54,7 +58,8 @@ export class ProductsComponent {
         icon: 'error',
         title: 'Oops...',
         text: 'Produto não encontrado!',
-        footer: 'Recarregue a página e tente novamente'
+        footer: 'Recarregue a página e tente novamente',
+        confirmButtonColor: '#212529',
       });
     }
   }

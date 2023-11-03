@@ -33,22 +33,22 @@ export class EditComponent {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.productsService.getById(id).subscribe((product: IProduct) => {
-        this.productForm.setValue({
-          id: product.id || 0,
-          nome: product.nome || '',
-          codigoBarras: product.codigoBarras || '',
-          preco: this.currencyPipe.transform(product.preco + '')
-        })
+        if (product) {
+          this.productForm.setValue({
+            id: product.id || 0,
+            nome: product.nome || '',
+            codigoBarras: product.codigoBarras || '',
+            preco: this.currencyPipe.transform(product.preco + '')
+          })
+        } else {
+          this.productNotFound();
+        }
+      }, error => {
+        console.error(error);
       })
     }
     else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Produto não encontrado!',
-        footer: 'Recarregue a página e tente novamente'
-      });
-      this.router.navigate(['/products']);
+      this.productNotFound();
     }
   }
 
@@ -59,10 +59,14 @@ export class EditComponent {
       this.productForm.get('preco')?.setValue(preco.replace('R$ ', '').replace(',', '.'));
       const product: IProduct = this.productForm.value as Partial<IProduct> as IProduct;
       this.productsService.update(product).subscribe(result => {
-        Swal.fire(
-          'Atualizado!',
-          'Produto atualizado com sucesso!',
-          'success'
+        Swal.fire({
+            title: 'Atualizado!',
+            text: "Produto atualizado com sucesso!",
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#212529',
+            confirmButtonText: 'Ok'
+          }
         );
         this.router.navigate(['/products']);
 
@@ -72,6 +76,7 @@ export class EditComponent {
           icon: 'error',
           title: 'Oops...',
           text: 'Produto não atualizado!',
+          confirmButtonColor: '#212529',
           footer: (error.error.errors ? error.error.errors[0].defaultMessage : error.error.message)
         })
       });
@@ -84,5 +89,14 @@ export class EditComponent {
     this.productForm.get('preco')?.setValue(precoFormatado);
   }
 
+  productNotFound() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Produto não encontrado!',
+      confirmButtonColor: '#212529'
+    });
+    this.router.navigate(['/products']);
+  }
 
 }

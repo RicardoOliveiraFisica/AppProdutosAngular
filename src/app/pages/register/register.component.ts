@@ -33,10 +33,15 @@ export class RegisterComponent {
       this.productForm.get('preco')?.setValue(preco.replace('R$ ', '').replace(',', '.'));
       const product: IProduct = this.productForm.value as Partial<IProduct> as IProduct;
       this.productsService.register(product).subscribe(result => {
-        Swal.fire(
-          'Cadastrado!',
-          'Produto cadastrado com sucesso!',
-          'success'
+        Swal.fire({
+            title: 'Cadastrado',
+            text: "Produto cadastrado com sucesso!",
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#212529',
+            confirmButtonText: 'Ok'
+          }
+
         ).then((result) => {
           if (result.isConfirmed)
             this.newRegister();
@@ -47,6 +52,7 @@ export class RegisterComponent {
           icon: 'error',
           title: 'Oops...',
           text: 'Produto não cadastrado!',
+          confirmButtonColor: '#212529',
           footer: (error.error.errors ? error.error.errors[0].defaultMessage : error.error.message)
         })
       });
@@ -59,7 +65,7 @@ export class RegisterComponent {
       text: "Se desejar realizar um novo cadastro clique em SIM!",
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#212529',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sim',
       cancelButtonText: 'Não'
