@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from 'src/app/interfaces/product';
 import { CurrencyMask } from 'src/app/services/mask/currency.mask';
+import { CurrencyPipe } from 'src/app/services/pipe/currency.pipe';
 import { ProductsService } from 'src/app/services/products.service';
 import Swal from 'sweetalert2';
 
@@ -24,7 +25,8 @@ export class EditComponent {
   constructor(private productsService: ProductsService,
               private route: ActivatedRoute,
               private router: Router,
-              private currencyMask: CurrencyMask
+              private currencyMask: CurrencyMask,
+              private currencyPipe: CurrencyPipe
     ) {}
 
   ngOnInit() {
@@ -35,7 +37,7 @@ export class EditComponent {
           id: product.id || 0,
           nome: product.nome || '',
           codigoBarras: product.codigoBarras || '',
-          preco: product.preco + ''
+          preco: this.currencyPipe.transform(product.preco + '')
         })
       })
     }
@@ -53,9 +55,9 @@ export class EditComponent {
   update() {
     this.submitted = true;
     if (this.productForm.valid) {
-    const preco = this.productForm.get('preco')?.value + '';
-    this.productForm.get('preco')?.setValue(preco.replace('R$ ', '').replace(',', '.'));
-      const product: IProduct = this.productForm.value as unknown as IProduct;
+      const preco = this.productForm.get('preco')?.value + '';
+      this.productForm.get('preco')?.setValue(preco.replace('R$ ', '').replace(',', '.'));
+      const product: IProduct = this.productForm.value as Partial<IProduct> as IProduct;
       this.productsService.update(product).subscribe(result => {
         Swal.fire(
           'Atualizado!',

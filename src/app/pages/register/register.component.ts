@@ -27,11 +27,11 @@ export class RegisterComponent {
   ) {}
 
   register() {
-  this.submitted = true;
-  if (this.productForm.valid) {
-    const preco = this.productForm.get('preco')?.value + '';
-    this.productForm.get('preco')?.setValue(preco.replace('R$ ', '').replace(',', '.'));
-      const product: IProduct = this.productForm.value as unknown as IProduct;
+    this.submitted = true;
+    if (this.productForm.valid) {
+      const preco = this.productForm.get('preco')?.value + '';
+      this.productForm.get('preco')?.setValue(preco.replace('R$ ', '').replace(',', '.'));
+      const product: IProduct = this.productForm.value as Partial<IProduct> as IProduct;
       this.productsService.register(product).subscribe(result => {
         Swal.fire(
           'Cadastrado!',
