@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from 'src/app/interfaces/product';
+import { CurrencyMask } from 'src/app/services/mask/currency.mask';
 import { ProductsService } from 'src/app/services/products.service';
 import Swal from 'sweetalert2';
 
@@ -11,16 +12,19 @@ import Swal from 'sweetalert2';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent {
+  submitted = false;
+
   productForm = new FormGroup({
     id: new FormControl(0, Validators.required),
     nome: new FormControl('', [Validators.maxLength(100) ,Validators.required]),
-    codigoBarras: new FormControl('', Validators.required),
-    preco: new FormControl(0.00, Validators.required)
+    codigoBarras: new FormControl('', [Validators.maxLength(14), Validators.required]),
+    preco: new FormControl('', Validators.required)
   });
 
   constructor(private productsService: ProductsService,
               private route: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private currencyMask: CurrencyMask
     ) {}
 
   ngOnInit() {
@@ -31,7 +35,7 @@ export class EditComponent {
           id: product.id || 0,
           nome: product.nome || '',
           codigoBarras: product.codigoBarras || '',
-          preco: product.preco || 0.00
+          preco: product.preco + ''
         })
       })
     }
@@ -47,23 +51,36 @@ export class EditComponent {
   }
 
   update() {
-    const product: IProduct = this.productForm.value as IProduct;
-    this.productsService.update(product).subscribe(result => {
-      Swal.fire(
-        'Atualizado!',
-        'Produto atualizado com sucesso!',
-        'success'
-      );
-      this.router.navigate(['/products']);
+    this.submitted = true;
+    if (this.productForm.valid) {
+    const preco = this.productForm.get('preco')?.value + '';
+    this.productForm.get('preco')?.setValue(preco.replace('R$ ', '').replace(',', '.'));
+      const product: IProduct = this.productForm.value as unknown as IProduct;
+      this.productsService.update(product).subscribe(result => {
+        Swal.fire(
+          'Atualizado!',
+          'Produto atualizado com sucesso!',
+          'success'
+        );
+        this.router.navigate(['/products']);
 
-    }, error => {
-      console.error(error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Produto não atualizado!',
-        footer: (error.error.errors ? error.error.errors[0].defaultMessage : error.error.message)
-      })
-    });
+      }, error => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Produto não atualizado!',
+          footer: (error.error.errors ? error.error.errors[0].defaultMessage : error.error.message)
+        })
+      });
+    }
   }
+
+  getCurrencyMask() {
+    const value = this.productForm.get('preco')?.value;
+    let precoFormatado = this.currencyMask.mask(value + '');
+    this.productForm.get('preco')?.setValue(precoFormatado);
+  }
+
+
 }

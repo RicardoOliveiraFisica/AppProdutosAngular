@@ -1,26 +1,47 @@
-<h1 class="display-12">Edição de Produtos</h1>
+<h1 class="display-12 mt-3 text-center">Edição de Produtos</h1>
 <hr>
 <div class="container-fluid">
   <form [formGroup]="productForm" (ngSubmit)="update()">
-    <div class="row">
+    <div class="row my-3">
       <div class="col col-8">
           <label for="nome" class="form-label">Nome do Produto</label>
           <input type="text" class="form-control" id="nome" aria-describedby="nameHelp" formControlName="nome" placeholder="Digite o nome do produto">
+          <ng-container *ngIf="productForm.controls.nome.touched || submitted">
+            <span *ngIf="productForm.controls.nome.errors?.['required']" class="mgs-alert text-danger">
+                Campo obrigatório
+            </span>
+            <span *ngIf="productForm.controls.nome.errors?.['maxlength']" class="mgs-alert text-danger">
+              Máximo de 100 caracteres
+          </span>
+          </ng-container>
       </div>
     </div>
-    <div class="row">
+    <div class="row my-3">
       <div class="col col-4">
           <label for="nome" class="form-label">Código de Barras</label>
           <input type="text" class="form-control" id="codigoBarras" aria-describedby="nameHelp" formControlName="codigoBarras" placeholder="Digite o codigo de barras">
+          <ng-container *ngIf="productForm.controls.codigoBarras.touched || submitted">
+            <span *ngIf="productForm.controls.codigoBarras.errors?.['required']" class="mgs-alert text-danger">
+              Campo obrigatório
+            </span>
+            <span *ngIf="productForm.controls.codigoBarras.errors?.['maxlength']" class="mgs-alert text-danger">
+              Máximo de 14 caracteres
+            </span>
+          </ng-container>
       </div>
     </div>
-    <div class="row">
+    <div class="row my-3">
       <div class="col col-2">
           <label for="nome" class="form-label">Preço</label>
-          <input type="number" class="form-control" id="preco" aria-describedby="nameHelp" formControlName="preco" placeholder="Digite o preço do produto">
+          <input type="text" class="form-control" id="preco" aria-describedby="nameHelp" (keyup)="getCurrencyMask()" formControlName="preco" placeholder="Digite o preço">
+          <ng-container *ngIf="productForm.controls.preco.touched || submitted">
+            <span *ngIf="productForm.controls.preco.errors" class="mgs-alert text-danger">
+                Campo obrigatório
+            </span>
+          </ng-container>
       </div>
     </div>
     <app-button label="Voltar" [routerLink]="['/products/']"></app-button>
-    <button type="submit" class="btn btn-dark" [disabled]="!productForm.valid">Atualizar</button>
+    <button type="submit" class="btn btn-dark">Atualizar</button>
   </form>
 </div>
