@@ -60,6 +60,7 @@ export class RegisterComponent {
   }
 
   newRegister() {
+    this.router.navigate(['/products']);
     Swal.fire({
       title: 'Continuar cadastrando?',
       text: "Se desejar realizar um novo cadastro clique em SIM!",
@@ -75,7 +76,7 @@ export class RegisterComponent {
         this.router.navigate(['/products/create']);
 
       } else {
-        this.router.navigate(['/products']);
+        /* this.router.navigate(['/products']); */
       }
     })
 
